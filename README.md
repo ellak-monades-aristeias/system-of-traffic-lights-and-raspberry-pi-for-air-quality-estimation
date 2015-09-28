@@ -6,6 +6,8 @@ What is needed
 
 * 4 * raspberry pi
 * 1 * airpi
+* one [relay](https://www.sparkfun.com/products/11042) for each light
+* cables
 
 The software stack is based on LAMP (Linux, Apache, Mysql, Php).
 
