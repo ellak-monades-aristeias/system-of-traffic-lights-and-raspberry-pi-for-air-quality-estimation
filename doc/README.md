@@ -8,13 +8,33 @@ Run the following commands to every raspberry pi:
 
 # Connections of the lights
 
-Each light has 13 lights, as shown in the [image](lights.png)
-In order to operate correctly, each light must be wires as shown in [image](schematic.png).
+Each light has 13 lights, as shown in the [image](lights.png).
+The raspberry pi 2 has 40 pins, as shown in the [image](http://www.open-electronics.org/wp-content/uploads/2014/12/Raspberry-Pi-GPIO-Layout-Worksheet.png).
+In order to operate correctly, the connections that must be used are hihglighted in the [image](schematic.png).
+For reference, these are the correct connections:
+
+* GPIO17 - straight green
+* GPIO18 - straight yellow
+* GPIO27 - straight red
+* GPIO22 - left green
+* GPIO23 - left green
+* GPIO24 - left red
+* GPIO25 - right green
+* GPIO5 - right yellow
+* GPIO6 - right red
+* GPIO12 - walk left right green
+* GPIO13 - walk left right red
+* GPIO19 - walk up down green
+* GPIO16 - walk up down red
+
+The above connection must go first to a relay, and then the output of the relay must go the the actual lights.
 If a trafic light has no light for one side of the road (for example, if no road to the right is presented), then the corresponding connections must be left unwired.
-If a trafic light contains more than on light in one connection, connect these lights after the relay.
+If a trafic light contains more than on light in one connection, connect these lights in parralel after the relay.
 For better performance, the 5.5V and GRD wire of the relays can be provided through other circuit and not the raspberry pi.
 
-TODO
+The trafic lights must be connected with each other in a local network.
+As the raspberry pi has an ethernet port, the idial connection is through a switch with 4 ports.
+
 
 # Software configuration
 
