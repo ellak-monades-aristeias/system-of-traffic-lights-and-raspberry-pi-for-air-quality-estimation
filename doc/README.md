@@ -46,7 +46,24 @@ Install the following packages:
     sudo a2enmod auth_mysql
     sudo service apache2 restart
 
-    TODO
+Connect to the database:
+
+mysql -p -u root
+
+In the mysql cliend, copy and paste the commands that are located in the [create_tables_raspberry_server](create_tables_raspberry_server).
+
+Copy the files from the folder `src/raspberryServer/var/www` to the folder `/var/www`:
+
+    sudo cp src/raspberryServer/var/www/* /var/www
+
+Copy the file `src/raspberryServer/opt/trafficLight/traficLightServer.py` to `/opt/trafficLight/traficLightServer.py`:
+
+    sudo mkdir /opt/trafficLight/
+    sudo cp src/raspberryServer/opt/trafficLight/traficLightServer.py /opt/trafficLight/traficLightServer.py
+
+In order to run this script on boot time, add the following line to `/etc/rc.local`:
+
+     /opt/trafficLight/traficLightServer.py 2>&1 > /var/log/traficLightServer.log &
 
 ## Trafic lights
 
