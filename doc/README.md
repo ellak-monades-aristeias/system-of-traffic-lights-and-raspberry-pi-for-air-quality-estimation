@@ -63,8 +63,17 @@ Copy the file `src/raspberryServer/opt/trafficLight/traficLightServer.py` to `/o
 
 In order to run this script on boot time, add the following line to `/etc/rc.local`:
 
-     /opt/trafficLight/traficLightServer.py 2>&1 > /var/log/traficLightServer.log &
+     sudo python /opt/trafficLight/traficLightServer.py 2>&1 > /var/log/traficLightServer.log &
 
 ## Trafic lights
 
-    TODO
+The trafic light client must run on every raspberry (it must also run in the rusberry that acts as a server).
+
+Copy the file `src/raspberryClient/opt/trafficLight/traficLightClient.py` to `/opt/trafficLight/traficLightClient.py`:
+
+    mkdir /opt/trafficLight/
+    sudo cp src/raspberryClient/opt/trafficLight/traficLightClient.py /opt/trafficLight/traficLightClient.py
+
+In order to run this script on boot time, add the following line to `/etc/rc.local`:
+
+    sudo python /opt/trafficLight/traficLightClient.py 2>&1 > /var/log/traficLightClient.log &
