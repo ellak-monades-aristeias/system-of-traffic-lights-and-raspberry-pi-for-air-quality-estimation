@@ -71,5 +71,11 @@
       <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
       <input type="submit" name="submit" value="Change Password"/>
     </form>
+
+    <form method="POST" action="viewStatus.php">
+      <input type="hidden" name="userU" value="<?php echo $userU; ?>" />
+      <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
+      <input type="submit" name="submit" value="View status"/>
+    </form>
   </body>
 </html>

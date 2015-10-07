@@ -48,7 +48,7 @@ Install the following packages:
 
 Connect to the database:
 
-mysql -p -u root
+    mysql -p -u root
 
 In the mysql cliend, copy and paste the commands that are located in the [create_tables_raspberry_server](create_tables_raspberry_server).
 
@@ -64,6 +64,8 @@ Copy the file `src/raspberryServer/opt/trafficLight/traficLightServer.py` to `/o
 In order to run this script on boot time, add the following line to `/etc/rc.local`:
 
      sudo python /opt/trafficLight/traficLightServer.py 2>&1 > /var/log/traficLightServer.log &
+
+In order connect to the web interface, use the url `serverip/statusConfiguration.php`. The default username and password are both `admin`. After sucessfull login, you can change the password.
 
 ## Trafic lights
 

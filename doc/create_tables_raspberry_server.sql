@@ -11,7 +11,7 @@ INSERT INTO `users` (`username`, `password`) VALUES ('admin', 'admin');
 
 CREATE TABLE IF NOT EXISTS `status` (
   -- The id of the status
-  `id` INT NOT NULL,
+  `id` VARCHAR(255) NOT NULL,
   
   -- The information bellow contain the status for the 4 trafic lights.
   -- Each light has the following lights:
@@ -86,15 +86,16 @@ CREATE TABLE IF NOT EXISTS `status` (
 
 CREATE TABLE IF NOT EXISTS `statusChain` (
   -- which status is after the current one.
-  `statusIdNow`  INT NOT NULL,
-  `statusIdNext` INT NOT NULL,
+  `statusIdNow`  VARCHAR(255) NOT NULL,
+  `statusIdNext` VARCHAR(255) NOT NULL,
   PRIMARY KEY(`statusIdNow`),
   FOREIGN KEY (`statusIdNow`)  REFERENCES `status`(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
-  FOREIGN KEY (`statusIdNext`) REFERENCES `status`(`id`) ON UPDATE CASCADE ON DELETE CASCADE,
+  FOREIGN KEY (`statusIdNext`) REFERENCES `status`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS `statusNow` (
   -- The curent status.
-  `statusIdNow`  INT NOT NULL,
+  `statusIdNow`  VARCHAR(255) NOT NULL,
   FOREIGN KEY (`statusIdNow`)  REFERENCES `status`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
