@@ -531,5 +531,446 @@
       <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
     </form>
 
+    <h2>Status</h2>
+
+    <table border="1">
+      <tr>
+        <td>Light</td>
+        <td colspan="3">Straight</td>
+        <td colspan="3">Left</td>
+        <td colspan="3">Right</td>
+        <td colspan="2">LeftRightWalk</td>
+        <td colspan="2">UpDownWalk</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>Green</td>
+        <td>Yellow</td>
+        <td>Red</td>
+        <td>Green</td>
+        <td>Yellow</td>
+        <td>Red</td>
+        <td>Green</td>
+        <td>Yellow</td>
+        <td>Red</td>
+        <td>Green</td>
+        <td>Red</td>
+        <td>Green</td>
+        <td>Red</td>
+      </tr>
+      <?php
+        //Show previous status.
+
+        try {
+          $db = new PDO('mysql:dbname='.$dbname.';host='.$host.';port='.$port, $user, $pass);
+          $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $sql = "SELECT * FROM `status` ORDER BY `id`;";
+          $stmt = $db->prepare($sql);
+          $stmt->execute();
+          
+          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $statusId = $row['id'];
+            $straightGreen1  = $row['straightGreen1'];
+            $straightYellow1 = $row['straightYellow1'];
+            $straightRed1    = $row['straightRed1'];
+            $leftGreen1      = $row['leftGreen1'];
+            $leftYellow1     = $row['leftYellow1'];
+            $leftRed1        = $row['leftRed1'];
+            $rightGreen1     = $row['rightGreen1'];
+            $rightYellow1    = $row['rightYellow1'];
+            $rightRed1       = $row['rightRed1'];
+            $walkLrGreen1    = $row['walkLrGreen1'];
+            $walkLrRed1      = $row['walkLrRed1'];
+            $walkUdGreen1    = $row['walkUdGreen1'];
+            $walkUdRed1      = $row['walkUdRed1'];
+
+            $straightGreen2  = $row['straightGreen2'];
+            $straightYellow2 = $row['straightYellow2'];
+            $straightRed2    = $row['straightRed2'];
+            $leftGreen2      = $row['leftGreen2'];
+            $leftYellow2     = $row['leftYellow2'];
+            $leftRed2        = $row['leftRed2'];
+            $rightGreen2     = $row['rightGreen2'];
+            $rightYellow2    = $row['rightYellow2'];
+            $rightRed2       = $row['rightRed2'];
+            $walkLrGreen2    = $row['walkLrGreen2'];
+            $walkLrRed2      = $row['walkLrRed2'];
+            $walkUdGreen2    = $row['walkUdGreen2'];
+            $walkUdRed2      = $row['walkUdRed2'];
+
+            $straightGreen3  = $row['straightGreen3'];
+            $straightYellow3 = $row['straightYellow3'];
+            $straightRed3    = $row['straightRed3'];
+            $leftGreen3      = $row['leftGreen3'];
+            $leftYellow3     = $row['leftYellow3'];
+            $leftRed3        = $row['leftRed3'];
+            $rightGreen3     = $row['rightGreen3'];
+            $rightYellow3    = $row['rightYellow3'];
+            $rightRed3       = $row['rightRed3'];
+            $walkLrGreen3    = $row['walkLrGreen3'];
+            $walkLrRed3      = $row['walkLrRed3'];
+            $walkUdGreen3    = $row['walkUdGreen3'];
+            $walkUdRed3      = $row['walkUdRed3'];
+
+            $straightGreen4  = $row['straightGreen4'];
+            $straightYellow4 = $row['straightYellow4'];
+            $straightRed4    = $row['straightRed4'];
+            $leftGreen4      = $row['leftGreen4'];
+            $leftYellow4     = $row['leftYellow4'];
+            $leftRed4        = $row['leftRed4'];
+            $rightGreen4     = $row['rightGreen4'];
+            $rightYellow4    = $row['rightYellow4'];
+            $rightRed4       = $row['rightRed4'];
+            $walkLrGreen4    = $row['walkLrGreen4'];
+            $walkLrRed4      = $row['walkLrRed4'];
+            $walkUdGreen4    = $row['walkUdGreen4'];
+            $walkUdRed4      = $row['walkUdRed4'];
+            
+            if($straightGreen1) {
+              $straightGreen1 = "on";
+            } else {
+              $straightGreen1 = "";
+            }
+            if($straightYellow1) {
+              $straightYellow1 = "on";
+            } else {
+              $straightYellow1 = "";
+            }
+            if($straightRed1) {
+              $straightRed1 = "on";
+            } else {
+              $straightRed1 = "";
+            }
+            if($leftGreen1) {
+              $leftGreen1 = "on";
+            } else {
+              $leftGreen1 = "";
+            }
+            if($leftYellow1) {
+              $leftYellow1 = "on";
+            } else {
+              $leftYellow1 = "";
+            }
+            if($leftRed1) {
+              $leftRed1 = "on";
+            } else {
+              $leftRed1 = "";
+            }
+            if($rightGreen1) {
+              $rightGreen1 = "on";
+            } else {
+              $rightGreen1 = "";
+            }
+            if($rightYellow1) {
+              $rightYellow1 = "on";
+            } else {
+              $rightYellow1 = "";
+            }
+            if($rightRed1) {
+              $rightRed1 = "on";
+            } else {
+              $rightRed1 = "";
+            }
+            if($walkLrGreen1) {
+              $walkLrGreen1 = "on";
+            } else {
+              $walkLrGreen1 = "";
+            }
+            if($walkLrRed1) {
+              $walkLrRed1 = "on";
+            } else {
+              $walkLrRed1 = "";
+            }
+            if($walkUdGreen1) {
+              $walkUdGreen1 = "on";
+            } else {
+              $walkUdGreen1 = "";
+            }
+            if($walkUdRed1) {
+              $walkUdRed1 = "on";
+            } else {
+              $walkUdRed1 = "";
+            }
+            
+            if($straightGreen2) {
+              $straightGreen2 = "on";
+            } else {
+              $straightGreen2 = "";
+            }
+            if($straightYellow2) {
+              $straightYellow2 = "on";
+            } else {
+              $straightYellow2 = "";
+            }
+            if($straightRed2) {
+              $straightRed2 = "on";
+            } else {
+              $straightRed2 = "";
+            }
+            if($leftGreen2) {
+              $leftGreen2 = "on";
+            } else {
+              $leftGreen2 = "";
+            }
+            if($leftYellow2) {
+              $leftYellow2 = "on";
+            } else {
+              $leftYellow2 = "";
+            }
+            if($leftRed2) {
+              $leftRed2 = "on";
+            } else {
+              $leftRed2 = "";
+            }
+            if($rightGreen2) {
+              $rightGreen2 = "on";
+            } else {
+              $rightGreen2 = "";
+            }
+            if($rightYellow2) {
+              $rightYellow2 = "on";
+            } else {
+              $rightYellow2 = "";
+            }
+            if($rightRed2) {
+              $rightRed2 = "on";
+            } else {
+              $rightRed2 = "";
+            }
+            if($walkLrGreen2) {
+              $walkLrGreen2 = "on";
+            } else {
+              $walkLrGreen2 = "";
+            }
+            if($walkLrRed2) {
+              $walkLrRed2 = "on";
+            } else {
+              $walkLrRed2 = "";
+            }
+            if($walkUdGreen2) {
+              $walkUdGreen2 = "on";
+            } else {
+              $walkUdGreen2 = "";
+            }
+            if($walkUdRed2) {
+              $walkUdRed2 = "on";
+            } else {
+              $walkUdRed2 = "";
+            }
+            
+            if($straightGreen3) {
+              $straightGreen3 = "on";
+            } else {
+              $straightGreen3 = "";
+            }
+            if($straightYellow3) {
+              $straightYellow3 = "on";
+            } else {
+              $straightYellow3 = "";
+            }
+            if($straightRed3) {
+              $straightRed3 = "on";
+            } else {
+              $straightRed3 = "";
+            }
+            if($leftGreen3) {
+              $leftGreen3 = "on";
+            } else {
+              $leftGreen3 = "";
+            }
+            if($leftYellow3) {
+              $leftYellow3 = "on";
+            } else {
+              $leftYellow3 = "";
+            }
+            if($leftRed3) {
+              $leftRed3 = "on";
+            } else {
+              $leftRed3 = "";
+            }
+            if($rightGreen3) {
+              $rightGreen3 = "on";
+            } else {
+              $rightGreen3 = "";
+            }
+            if($rightYellow3) {
+              $rightYellow3 = "on";
+            } else {
+              $rightYellow3 = "";
+            }
+            if($rightRed3) {
+              $rightRed3 = "on";
+            } else {
+              $rightRed3 = "";
+            }
+            if($walkLrGreen3) {
+              $walkLrGreen3 = "on";
+            } else {
+              $walkLrGreen3 = "";
+            }
+            if($walkLrRed3) {
+              $walkLrRed3 = "on";
+            } else {
+              $walkLrRed3 = "";
+            }
+            if($walkUdGreen3) {
+              $walkUdGreen3 = "on";
+            } else {
+              $walkUdGreen3 = "";
+            }
+            if($walkUdRed3) {
+              $walkUdRed3 = "on";
+            } else {
+              $walkUdRed3 = "";
+            }
+            
+            if($straightGreen4) {
+              $straightGreen4 = "on";
+            } else {
+              $straightGreen4 = "";
+            }
+            if($straightYellow4) {
+              $straightYellow4 = "on";
+            } else {
+              $straightYellow4 = "";
+            }
+            if($straightRed4) {
+              $straightRed4 = "on";
+            } else {
+              $straightRed4 = "";
+            }
+            if($leftGreen4) {
+              $leftGreen4 = "on";
+            } else {
+              $leftGreen4 = "";
+            }
+            if($leftYellow4) {
+              $leftYellow4 = "on";
+            } else {
+              $leftYellow4 = "";
+            }
+            if($leftRed4) {
+              $leftRed4 = "on";
+            } else {
+              $leftRed4 = "";
+            }
+            if($rightGreen4) {
+              $rightGreen4 = "on";
+            } else {
+              $rightGreen4 = "";
+            }
+            if($rightYellow4) {
+              $rightYellow4 = "on";
+            } else {
+              $rightYellow4 = "";
+            }
+            if($rightRed4) {
+              $rightRed4 = "on";
+            } else {
+              $rightRed4 = "";
+            }
+            if($walkLrGreen4) {
+              $walkLrGreen4 = "on";
+            } else {
+              $walkLrGreen4 = "";
+            }
+            if($walkLrRed4) {
+              $walkLrRed4 = "on";
+            } else {
+              $walkLrRed4 = "";
+            }
+            if($walkUdGreen4) {
+              $walkUdGreen4 = "on";
+            } else {
+              $walkUdGreen4 = "";
+            }
+            if($walkUdRed4) {
+              $walkUdRed4 = "on";
+            } else {
+              $walkUdRed4 = "";
+            }
+            
+            echo "<tr>";
+            echo "<td></td>";
+            echo "<td colspan='9'>Status ID: $statusId</td>";
+            echo "<td colspan='4'></td>";
+            echo "</tr>";
+            
+            echo "<tr>";
+            echo "<td>1</td>";
+            echo "<td>$straightGreen1</td>";
+            echo "<td>$straightYellow1</td>";
+            echo "<td>$straightRed1</td>";
+            echo "<td>$leftGreen1</td>";
+            echo "<td>$leftYellow1</td>";
+            echo "<td>$leftRed1</td>";
+            echo "<td>$rightGreen1</td>";
+            echo "<td>$rightYellow1</td>";
+            echo "<td>$rightRed1</td>";
+            echo "<td>$walkLrRed1</td>";
+            echo "<td>$walkLrRed1</td>";
+            echo "<td>$walkUdGreen1</td>";
+            echo "<td>$walkUdRed1</td>";
+            echo "</tr>";
+            
+            echo "<tr>";
+            echo "<td>2</td>";
+            echo "<td>$straightGreen2</td>";
+            echo "<td>$straightYellow2</td>";
+            echo "<td>$straightRed2</td>";
+            echo "<td>$leftGreen2</td>";
+            echo "<td>$leftYellow2</td>";
+            echo "<td>$leftRed2</td>";
+            echo "<td>$rightGreen2</td>";
+            echo "<td>$rightYellow2</td>";
+            echo "<td>$rightRed2</td>";
+            echo "<td>$walkLrRed2</td>";
+            echo "<td>$walkLrRed2</td>";
+            echo "<td>$walkUdGreen2</td>";
+            echo "<td>$walkUdRed2</td>";
+            echo "</tr>";
+            
+            echo "<tr>";
+            echo "<td>3</td>";
+            echo "<td>$straightGreen3</td>";
+            echo "<td>$straightYellow3</td>";
+            echo "<td>$straightRed3</td>";
+            echo "<td>$leftGreen3</td>";
+            echo "<td>$leftYellow3</td>";
+            echo "<td>$leftRed3</td>";
+            echo "<td>$rightGreen3</td>";
+            echo "<td>$rightYellow3</td>";
+            echo "<td>$rightRed3</td>";
+            echo "<td>$walkLrRed3</td>";
+            echo "<td>$walkLrRed3</td>";
+            echo "<td>$walkUdGreen3</td>";
+            echo "<td>$walkUdRed3</td>";
+            echo "</tr>";
+            
+            echo "<tr>";
+            echo "<td>4</td>";
+            echo "<td>$straightGreen4</td>";
+            echo "<td>$straightYellow4</td>";
+            echo "<td>$straightRed4</td>";
+            echo "<td>$leftGreen4</td>";
+            echo "<td>$leftYellow4</td>";
+            echo "<td>$leftRed4</td>";
+            echo "<td>$rightGreen4</td>";
+            echo "<td>$rightYellow4</td>";
+            echo "<td>$rightRed4</td>";
+            echo "<td>$walkLrRed4</td>";
+            echo "<td>$walkLrRed4</td>";
+            echo "<td>$walkUdGreen4</td>";
+            echo "<td>$walkUdRed4</td>";
+            echo "</tr>";
+          }
+        } catch (PDOException $e) {
+          echo 'Error in sql: ' . $e->getMessage();
+        }
+        //Close connection.
+        $dbh = null;
+      ?>
+    </table>
+
   </body>
 </html>
