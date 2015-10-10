@@ -12,8 +12,13 @@
       $passU = NULL;
       //Check if the user name and password have been set.
       if (isset($_POST["userU"]) && isset($_POST["passU"]) ) {
-        $userU   = $_POST["userU"];
+        $userU  = $_POST["userU"];
         $passU  = $_POST["passU"];
+      } else if (isset($_GET["userU"]) && isset($_GET["passU"]) ) {
+        $userU  = $_GET["userU"];
+        $passU  = $_GET["passU"];
+      }
+      if ($userU!=NULL && $passU!=NULL) {
         //Check if they are correct.
         try {
           $db = new PDO('mysql:dbname='.$dbname.';host='.$host.';port='.$port, $user, $pass);
@@ -41,7 +46,7 @@
       //If the password or username is not set or are not correct, display the login form.
       if (is_null($userU) or is_null($passU)) {
     ?>
-        <form method="POST" action="">
+        <form method="POST" action="viewStatus.php">
           <table>
             <tr>
               <td>UserId: </td>
@@ -65,7 +70,29 @@
 
     <?php
       //If here, the username and pass are correct.
+    ?>
 
+    <?php
+      //Check if we must delete a status.
+      if (isset($_GET["delete"]) && $_GET["delete"]=="true" && isset($_GET["statusid"])) {
+        $statusId =    $_GET["statusid"];
+        
+        try {
+          $db = new PDO('mysql:dbname='.$dbname.';host='.$host.';port='.$port, $user, $pass);
+          $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $sql = "DELETE FROM `status` WHERE `id`=:statusId";
+          $stmt = $db->prepare($sql);
+          $stmt->bindParam(':statusId',    $statusId);
+          $stmt->execute();
+        } catch (PDOException $e) {
+          echo 'Error in sql: ' . $e->getMessage();
+        }
+        //Close connection.
+        $dbh = null;
+      }
+    ?>
+
+    <?php
       //Check if the a new status is provided.
 
       $statusId = NULL;
@@ -430,7 +457,7 @@
       <input type="submit" name="submit" value="Go back"/>
     </form>
     
-    <form method="POST" action="">
+    <form method="POST" action="viewStatus.php">
       <table border="1">
         <tr>
           <td>Light</td>
@@ -893,7 +920,7 @@
             echo "<tr>";
             echo "<td></td>";
             echo "<td colspan='9'>Status ID: $statusId</td>";
-            echo "<td colspan='4'></td>";
+            echo "<td colspan='4'><a href='viewStatus.php?userU=$userU&passU=$passU&delete=true&statusid=$statusId'> Delete </a></td>";
             echo "</tr>";
             
             echo "<tr>";
