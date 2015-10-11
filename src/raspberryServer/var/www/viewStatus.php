@@ -72,6 +72,12 @@
       //If here, the username and pass are correct.
     ?>
 
+    <form method="POST" action="statusConfiguration.php">
+      <input type="hidden" name="userU" value="<?php echo $userU; ?>" />
+      <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
+      <input type="submit" name="submit" value="Go back"/>
+    </form>
+
     <?php
       //Check if we must delete a status.
       if (isset($_GET["delete"]) && $_GET["delete"]=="true" && isset($_GET["statusid"])) {
@@ -450,12 +456,6 @@
         $dbh = null;
       }
     ?>
-
-    <form method="POST" action="statusConfiguration.php">
-      <input type="hidden" name="userU" value="<?php echo $userU; ?>" />
-      <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
-      <input type="submit" name="submit" value="Go back"/>
-    </form>
     
     <form method="POST" action="viewStatus.php">
       <table border="1">

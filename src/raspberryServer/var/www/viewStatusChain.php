@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Status configuration</title>
+    <title>Status chain configuration</title>
   </head>
   <body>
 
@@ -12,8 +12,13 @@
       $passU = NULL;
       //Check if the user name and password have been set.
       if (isset($_POST["userU"]) && isset($_POST["passU"]) ) {
-        $userU   = $_POST["userU"];
+        $userU  = $_POST["userU"];
         $passU  = $_POST["passU"];
+      } else if (isset($_GET["userU"]) && isset($_GET["passU"]) ) {
+        $userU  = $_GET["userU"];
+        $passU  = $_GET["passU"];
+      }
+      if ($userU!=NULL && $passU!=NULL) {
         //Check if they are correct.
         try {
           $db = new PDO('mysql:dbname='.$dbname.';host='.$host.';port='.$port, $user, $pass);
@@ -41,7 +46,7 @@
       //If the password or username is not set or are not correct, display the login form.
       if (is_null($userU) or is_null($passU)) {
     ?>
-        <form method="POST" action="">
+        <form method="POST" action="viewStatus.php">
           <table>
             <tr>
               <td>UserId: </td>
@@ -66,22 +71,12 @@
     <?php
       //If here, the username and pass are correct.
     ?>
-    <form method="POST" action="changePassword.php">
+
+    <form method="POST" action="statusConfiguration.php">
       <input type="hidden" name="userU" value="<?php echo $userU; ?>" />
       <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
-      <input type="submit" name="submit" value="Change Password"/>
+      <input type="submit" name="submit" value="Go back"/>
     </form>
 
-    <form method="POST" action="viewStatus.php">
-      <input type="hidden" name="userU" value="<?php echo $userU; ?>" />
-      <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
-      <input type="submit" name="submit" value="View status"/>
-    </form>
-
-    <form method="POST" action="viewStatusChain.php">
-      <input type="hidden" name="userU" value="<?php echo $userU; ?>" />
-      <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
-      <input type="submit" name="submit" value="View status chain"/>
-    </form>
   </body>
 </html>

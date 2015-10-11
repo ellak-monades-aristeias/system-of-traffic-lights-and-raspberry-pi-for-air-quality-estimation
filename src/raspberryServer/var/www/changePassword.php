@@ -75,6 +75,12 @@
     <?php
       } else {
     ?>
+        <form method="POST" action="statusConfiguration.php">
+          <input type="hidden" name="userU" value="<?php echo $userU; ?>" />
+          <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
+          <input type="submit" name="submit" value="Go back"/>
+        </form>
+        
         <form method="POST" action="">
           <table>
             <tr> <td>New Password: </td> <td><input type="text" name="passNew" value="<?php echo $passU; ?>"></td> </tr>
