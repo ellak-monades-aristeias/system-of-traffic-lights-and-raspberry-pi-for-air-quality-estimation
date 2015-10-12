@@ -46,7 +46,7 @@
       //If the password or username is not set or are not correct, display the login form.
       if (is_null($userU) or is_null($passU)) {
     ?>
-        <form method="POST" action="viewStatus.php">
+        <form method="POST" action="viewStatusChain.php">
           <table>
             <tr>
               <td>UserId: </td>
@@ -77,6 +77,109 @@
       <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
       <input type="submit" name="submit" value="Go back"/>
     </form>
+
+    <?php
+      //Check if we must delete a statusChain record.
+      if (isset($_GET["delete"]) && $_GET["delete"]=="true" && isset($_GET["statusIdNow"])) {
+        $statusIdNow =    $_GET["statusIdNow"];
+        
+        try {
+          $db = new PDO('mysql:dbname='.$dbname.';host='.$host.';port='.$port, $user, $pass);
+          $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $sql = "DELETE FROM `statusChain` WHERE `statusIdNow`=:statusIdNow";
+          $stmt = $db->prepare($sql);
+          $stmt->bindParam(':statusIdNow',    $statusIdNow);
+          $stmt->execute();
+        } catch (PDOException $e) {
+          echo 'Error in sql: ' . $e->getMessage();
+        }
+        //Close connection.
+        $dbh = null;
+      }
+    ?>
+
+    <?php
+      //Check if the a new status chain is provided.
+      $statusIdNow  = NULL;
+      $statusIdNext = NULL;
+      if (isset($_POST['statusIdNow']) && isset($_POST['statusIdNext'])) {
+        $statusIdNow  = $_POST['statusIdNow'];
+        $statusIdNext = $_POST['statusIdNext'];
+
+        try {
+          $db = new PDO('mysql:dbname='.$dbname.';host='.$host.';port='.$port, $user, $pass);
+          $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          
+          $sql = "INSERT INTO `statusChain`(`statusIdNow`, `statusIdNext`) "
+          ."VALUES (:statusIdNow, :statusIdNext)";
+          $stmt = $db->prepare($sql);
+          $stmt->bindParam(':statusIdNow',  $statusIdNow);
+          $stmt->bindParam(':statusIdNext', $statusIdNext);
+          $stmt->execute();
+          $statusIdNow  = NULL;
+          $statusIdNext = NULL;
+        } catch (PDOException $e) {
+          echo 'Error in sql: ' . $e->getMessage();
+        }
+        //Close connection.
+        $dbh = null;
+      }
+    ?>
+
+    <form method="POST" action="viewStatusChain.php">
+      <table border="1">
+        <tr>
+          <td>StatusId Now: </td>
+          <td><input type="text" name="statusIdNow" value="<?php echo $statusIdNow; ?>" /></td>
+        </tr>
+        <tr>
+          <td>StatusId Next: </td>
+          <td><input type="text" name="statusIdNext" value="<?php echo $statusIdNext; ?>" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" name="submit" value="Add Status Chain"/></td>
+        </tr>
+      </table>
+      <input type="hidden" name="userU" value="<?php echo $userU; ?>" />
+      <input type="hidden" name="passU" value="<?php echo $passU; ?>" />
+    </form>
+
+    <h2>Status Chain</h2>
+
+    <table border="1">
+      <tr>
+        <td>StatusID Now</td>
+        <td>StatusID Next</td>
+        <td></td>
+      </tr>
+      <?php
+        //Show previous status chains.
+
+        try {
+          $db = new PDO('mysql:dbname='.$dbname.';host='.$host.';port='.$port, $user, $pass);
+          $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+          $sql = "SELECT `statusIdNow`, `statusIdNext` FROM `statusChain` ORDER BY `statusIdNow`;";
+          $stmt = $db->prepare($sql);
+          $stmt->execute();
+
+          while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $statusIdNow  = $row['statusIdNow'];
+            $statusIdNext = $row['statusIdNext'];
+
+            echo "<tr>";
+            echo "<td>$statusIdNow</td>";
+            echo "<td>$statusIdNext</td>";
+            echo "<td><a href='viewStatusChain.php?userU=$userU&passU=$passU&delete=true&statusIdNow=$statusIdNow'> Delete </a></td>";
+            echo "</tr>";
+          }
+        } catch (PDOException $e) {
+          echo 'Error in sql: ' . $e->getMessage();
+        }
+        //Close connection.
+        $dbh = null;
+      ?>
+    </table>
 
   </body>
 </html>
