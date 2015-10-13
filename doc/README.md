@@ -42,7 +42,9 @@ As the raspberry pi has an ethernet port, the idial connection is through a swit
 
 Install the following packages:
 
-    sudo apt-get -y install mysql-server mysql-client apache2 libapache2-mod-auth-mysql php5-cli php5-mysql php5 libapache2-mod-php5
+    sudo apt-get -y install mysql-server mysql-client apache2 libapache2-mod-auth-mysql php5-cli php5-mysql php5
+    sudo apt-get install python-mysqldb
+    libapache2-mod-php5
     sudo a2enmod auth_mysql
     sudo service apache2 restart
 
@@ -67,15 +69,45 @@ In order to run this script on boot time, add the following line to `/etc/rc.loc
 
 In order connect to the web interface, use the url `serverip/statusConfiguration.php`. The default username and password are both `admin`. After sucessfull login, you can change the password.
 
+Edit the file `/etc/network/interfaces` in order to give the server the ip `192.168.1.1`. Replace the lines that correspont to eth0 with the following:
+
+    iface eth0 inet static
+    address 192.168.1.1
+    netmask 255.255.255.0
+    network 192.168.1.0
+    broadcast 192.168.1.255
+
 ## Trafic lights
 
 The trafic light client must run on every raspberry (it must also run in the rusberry that acts as a server).
+
+Install the packages:
+
+    sudo apt-get install python-mysqldb
 
 Copy the file `src/raspberryClient/opt/trafficLight/traficLightClient.py` to `/opt/trafficLight/traficLightClient.py`:
 
     mkdir /opt/trafficLight/
     sudo cp src/raspberryClient/opt/trafficLight/traficLightClient.py /opt/trafficLight/traficLightClient.py
 
+Edit the file `/opt/trafficLight/traficLightClient.py`. Change the lines:
+
+    myId = 1;
+    url = "http://192.168.1.1/getStatus.php"
+
+with the sesired values. The `myId` variable must be 1 or 2 or 3 or 4 and it identifies the raspberry.
+The `url` holds the ip of the server.
+
+Edit the file `/etc/network/interfaces` in order to give the client the ip `192.168.1.?`. Replace the lines that correspont to eth0 with the following:
+
+    iface eth0 inet static
+    address 192.168.1.?
+    netmask 255.255.255.0
+    network 192.168.1.0
+    broadcast 192.168.1.255
+
+Note the `?`. This myst be replaced with the actual id of the rasperry (1 or 2 or 3 or 4).
+    
 In order to run this script on boot time, add the following line to `/etc/rc.local`:
 
     sudo python /opt/trafficLight/traficLightClient.py 2>&1 > /var/log/traficLightClient.log &

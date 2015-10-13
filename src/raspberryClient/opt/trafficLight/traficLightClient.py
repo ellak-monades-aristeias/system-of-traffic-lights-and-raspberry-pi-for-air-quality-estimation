@@ -41,26 +41,35 @@ GPIO.setup(gpioWalkUdGreen, GPIO.OUT)
 GPIO.setup(gpioWalkUdRed, GPIO.OUT)
 
 while True:
+  #It doe not sleep, in order to be as quick as posible, becaus the status may change in any moment.
   #Make an http request to the server.
-  resp = requests.get(url=url, params=params)
+  resp = requests.get(url)
+  print ("%s" % (resp))
   
   #Parse the json.
   data = json.loads(resp.text)
+
+  print ("Myid=%d" % (myId))
+  print("Straight:[%s, %s, %s]" % (data["straightGreen"+str(myId)], data["straightYellow"+str(myId)], data["straightRed"+str(myId)]))
+  print("Left:[%s, %s, %s]" % (data["leftGreen"+str(myId)], data["leftYellow"+str(myId)], data["leftRed"+str(myId)]))
+  print("Right:[%s, %s, %s]" % (data["rightGreen"+str(myId)], data["rightYellow"+str(myId)], data["rightRed"+str(myId)]))
+  print("WalkLR:[%s, %s]" % (data["walkLrRed"+str(myId)], data["walkUdGreen"+str(myId)]))
+  print("WalkUD:[%s, %s]" % (data["walkUdGreen"+str(myId)], data["walkUdRed"+str(myId)]))
   
   #Extract the values
-  straightGreen  = data["straightGreen$myId"]
-  straightYellow = data["straightYellow$myId"]
-  straightRed    = data["straightRed$myId"]
-  leftGreen      = data["leftGreen$myId"]
-  leftYellow     = data["leftYellow$myId"]
-  leftRed        = data["leftRed$myId"]
-  rightGreen     = data["rightGreen$myId"]
-  rightYellow    = data["rightYellow$myId"]
-  rightRed       = data["rightRed$myId"]
-  walkLrGreen    = data["walkLrGreen$myId"]
-  walkLrRed      = data["walkLrRed$myId"]
-  walkUdGreen    = data["walkUdGreen$myId"]
-  walkUdRed      = data["walkUdRed$myId"]
+  straightGreen  = data["straightGreen"+str(myId)]
+  straightYellow = data["straightYellow"+str(myId)]
+  straightRed    = data["straightRed"+str(myId)]
+  leftGreen      = data["leftGreen"+str(myId)]
+  leftYellow     = data["leftYellow"+str(myId)]
+  leftRed        = data["leftRed"+str(myId)]
+  rightGreen     = data["rightGreen"+str(myId)]
+  rightYellow    = data["rightYellow"+str(myId)]
+  rightRed       = data["rightRed"+str(myId)]
+  walkLrGreen    = data["walkLrGreen"+str(myId)]
+  walkLrRed      = data["walkLrRed"+str(myId)]
+  walkUdGreen    = data["walkUdGreen"+str(myId)]
+  walkUdRed      = data["walkUdRed"+str(myId)]
   
   #Light the lamps according to the values.
   GPIO.output(gpioStraightGreen,  straightGreen)
@@ -76,4 +85,3 @@ while True:
   GPIO.output(gpioWalkLrRed,      walkLrRed)
   GPIO.output(gpioWalkUdGreen,    walkUdGreen)
   GPIO.output(gpioWalkUdRed,      walkUdRed)
-
