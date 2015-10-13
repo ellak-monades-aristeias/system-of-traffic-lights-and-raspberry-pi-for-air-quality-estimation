@@ -42,9 +42,8 @@ As the raspberry pi has an ethernet port, the idial connection is through a swit
 
 Install the following packages:
 
-    sudo apt-get -y install mysql-server mysql-client apache2 libapache2-mod-auth-mysql php5-cli php5-mysql php5
+    sudo apt-get -y install mysql-server mysql-client apache2 libapache2-mod-auth-mysql php5-cli php5-mysql php5 libapache2-mod-php5
     sudo apt-get install python-mysqldb
-    libapache2-mod-php5
     sudo a2enmod auth_mysql
     sudo service apache2 restart
 
