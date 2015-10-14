@@ -75,6 +75,21 @@ Edit the file `/etc/network/interfaces` in order to give the server the ip `192.
     netmask 255.255.255.0
     network 192.168.1.0
     broadcast 192.168.1.255
+    gateway 192.168.1.254
+
+### Airpi configuration.
+
+First, we myst install the [airpi software](https://github.com/haydnw/AirPi). Run:
+
+    git clone http://github.com/haydnw/airpi AirPi
+    cd AirPi
+    sudo /bin/bash install.sh
+
+add the following line in the end of `~/.profile`
+
+    PATH=/home/pi/AirPi:$PATH
+
+TODO
 
 ## Trafic lights
 
