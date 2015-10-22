@@ -10,7 +10,7 @@
     $stmt->execute();
     $jsonData = array();
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      $jsonDate[] = $row;
+      $jsonData[] = $row;
     }
     echo json_encode($jsonData);
   } catch (PDOException $e) {
