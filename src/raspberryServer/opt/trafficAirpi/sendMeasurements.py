@@ -24,10 +24,12 @@ def execute(command):
         if time and no2 and co and vol:
             param="time=" + time + "&no2=" + no2 + "&co=" + co + "&volume=" + vol
             url = basUrl+"?userU="+userU+"&passU="+passU+"&"+param
+            print("try to sent: " + url)
             try:
               urllib2.urlopen(url).read()
-              print("send: " + url)
+              print("OK")
             except: 
+              print("Error")
               pass
         time = ""
         no2  = ""
