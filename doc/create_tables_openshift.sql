@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`username`, `password`) VALUES ('admin', 'admin');
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `measurements` (
   `time`   DATETIME NOT NULL,
   `no2`    FLOAT NOT NULL,
   `co`     FLOAT NOT NULL,
