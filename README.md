@@ -19,7 +19,7 @@ Documentation for [developers](README_DEVELOPERS.md).
 
 # License
 
-See: [LICENSE](LICENSE)
+See: [LICENSE.md](LICENSE.md)
 
 # Παραδωτέα
 
