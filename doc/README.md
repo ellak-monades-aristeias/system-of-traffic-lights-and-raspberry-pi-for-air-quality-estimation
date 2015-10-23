@@ -89,7 +89,16 @@ add the following line in the end of `~/.profile`
 
     PATH=/home/pi/AirPi:$PATH
 
-TODO
+Copy the file `src/raspberryServer/opt/trafficAirpi/sendMeasurements.py` to `/opt/trafficAirpi/sendMeasurements.py`:
+
+    sudo mkdir /opt/trafficAirpi/
+    sudo cp src/raspberryServer/opt/trafficAirpi/sendMeasurements.py /opt/trafficAirpi/sendMeasurements.py
+
+In order to run this script on boot time, add the following line to `/etc/rc.local`:
+
+     sudo python /opt/trafficAirpi/sendMeasurements.py 2>&1 > /var/log/sendMeasurements.log &
+
+The file `/opt/trafficAirpi/sendMeasurements.py` have the variables `basUrl`, `userU` and `passU` which can be changed. The `baseUrl` is the url of the remote server.
 
 ## Trafic lights
 
@@ -125,3 +134,9 @@ Note the `?`. This myst be replaced with the actual id of the rasperry (1 or 2 o
 In order to run this script on boot time, add the following line to `/etc/rc.local`:
 
     sudo python /opt/trafficLight/traficLightClient.py 2>&1 > /var/log/traficLightClient.log &
+
+# Remote Server configuration.
+
+The files in the directory `src/openshift/` are designed to be used out of the box with the [openshift](https://www.openshift.com) platform. However, they can be used with any LAMP server.
+
+Copy the files `src/openshift/*` the public accesible dicertory. Run the mysql commands that are in the file [doc/create_tables_openshift.sql](doc/create_tables_openshift.sql). If needed, change the username and the password. The remote server is ready.
