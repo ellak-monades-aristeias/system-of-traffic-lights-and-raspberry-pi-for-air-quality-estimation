@@ -10,7 +10,7 @@ Documentation for [developers](README_DEVELOPERS.md).
 
 See: [LICENSE.md](LICENSE.md)
 
-# Παραδωτέα
+# Παραδοτέα
 
 | Παραδοτέο | Σύντομη περιγραφή | URL |
 |-----------|-------------------|-----|
